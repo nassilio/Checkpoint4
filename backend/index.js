@@ -33,23 +33,20 @@ app.get("/api/main", (req, res) => {
 });
 
 //GET search
-app.get("api/search/posts"),
-  (req, res) => {
-    const search = req.query.subject;
-    db.query(
-      ("SELECT subject, image, text FROM post WHERE subject like CONCAT(" %
-        "?") %
-        ")",
-      search,
-      (err, results) => {
-        if (err) {
-          res.status(500).send(err);
-        } else {
-          res.status(200).json(results);
-        }
+app.get("/api/search/post", (req, res) => {
+  const search = req.query.subject;
+  db.query(
+    'SELECT subject, image, text FROM post WHERE subject LIKE CONCAT("%"?"%")',
+    search,
+    (err, results) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).json(results);
       }
-    );
-  };
+    }
+  );
+});
 
 app.listen(backendPort, err => {
   if (err) {

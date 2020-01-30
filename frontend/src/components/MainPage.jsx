@@ -4,7 +4,7 @@ import { backend } from "../conf.js";
 import { Image, CloudinaryContext } from "cloudinary-react";
 
 export default function MainPage() {
-  const [latestPost, setLatestPost] = useState([]);
+  const [latestPost, setLatestPost] = useState({});
   useEffect(() => {
     axios
       .get(`${backend}/api/main`)
@@ -16,23 +16,22 @@ export default function MainPage() {
 
   return (
     <div className="mainPage">
-      {latestPost
-        ? latestPost.map(lastPost => {
-            return (
-              <div className="latestPost">
-                <div className="subject">{lastPost.subject}</div>
-                <div className="image">
-                  <CloudinaryContext cloudName="nas">
-                    <Image publicId={lastPost.image} alt="No image" />
-                  </CloudinaryContext>
-                </div>
-                <div className="text">
-                  <p>{lastPost.text}</p>
-                </div>
-              </div>
-            );
-          })
-        : null}
+      latest post
+      {latestPost ? (
+        <div className="latestPost">
+          <div className="subject">{latestPost.subject}</div>
+          <div className="image">
+            <CloudinaryContext cloudName="wild-nas">
+              <Image publicId={latestPost.image} alt="No image" />
+            </CloudinaryContext>
+          </div>
+          <div className="text">
+            <p>{latestPost.text}</p>
+          </div>
+        </div>
+      ) : (
+        <img src="/nothing-Text.jpg" alt="nothing" className="nothingImg" />
+      )}
     </div>
   );
 }

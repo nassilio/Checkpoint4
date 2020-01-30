@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Image, CloudinaryContext } from "cloudinary-react";
+import "../style/Search.scss";
 
 export default function Search({ posts }) {
   return (

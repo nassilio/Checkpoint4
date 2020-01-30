@@ -3,6 +3,7 @@ import axios from "axios";
 import { backend } from "../conf.js";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import Search from "./Search";
+import "../style/MainPage.scss";
 
 export default function MainPage() {
   const [latestPost, setLatestPost] = useState({});
@@ -31,7 +32,7 @@ export default function MainPage() {
 
   return (
     <div className="mainPage">
-      latest post
+      <h1>Latest post</h1>
       {latestPost ? (
         <div className="latestPost">
           <div className="subject">{latestPost.subject}</div>

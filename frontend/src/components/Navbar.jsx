@@ -1,10 +1,10 @@
 import React from "react";
+import "../style/Navbar.scss";
 
 export default function Navbar() {
   return (
     <nav>
-      <h1>Is this a joke ?</h1>
-
+      <h1>CAT fact</h1>
       <ul>
         <li>Connexion</li>
         <li>

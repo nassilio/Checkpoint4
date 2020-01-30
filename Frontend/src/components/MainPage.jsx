@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { backend } from "../conf.js";
 import { Image, CloudinaryContext } from "cloudinary-react";
 
 export default function MainPage() {
@@ -8,7 +9,7 @@ export default function MainPage() {
     axios
       .get(`${backend}/api/main`)
       .then(({ data }) => {
-        getTeams(data);
+        latestPost(data);
       })
       .catch(err => {});
   }, []);

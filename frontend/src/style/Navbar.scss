@@ -1,0 +1,26 @@
+nav {
+  display: flex !important;
+  flex-direction: row;
+  position: sticky;
+  justify-content: space-between;
+  height: 8vh;
+  padding: 1vh !important;
+  h1 {
+    margin-left: 10px;
+    font-size: 5vh;
+    width: 20vw;
+    font-weight: bold;
+  }
+  ul {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    li {
+      margin-left: 20px;
+    }
+    img {
+      max-width: 26px;
+      max-height: 26px;
+    }
+  }
+}

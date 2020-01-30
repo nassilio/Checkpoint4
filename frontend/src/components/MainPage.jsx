@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { backend } from "../conf.js";
 import { Image, CloudinaryContext } from "cloudinary-react";
+import Search from "./Search";
 
 export default function MainPage() {
   const [latestPost, setLatestPost] = useState({});
   const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
     axios
@@ -17,12 +19,14 @@ export default function MainPage() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${backend}/api/search/post?subject=${search}`)
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch(err => {});
+    if (search) {
+      axios
+        .get(`${backend}/api/search/post?subject=${search}`)
+        .then(({ data }) => {
+          setResults(data);
+        })
+        .catch(err => {});
+    }
   }, [search]);
 
   return (
@@ -51,6 +55,7 @@ export default function MainPage() {
           onChange={e => setSearch(e.target.value)}
         ></input>
       </div>
+      <Search posts={results} />
     </div>
   );
 }

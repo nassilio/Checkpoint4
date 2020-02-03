@@ -4,6 +4,7 @@ import { backend } from "../conf.js";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import Search from "./Search";
 import "../style/MainPage.scss";
+import Post from "./Post";
 
 export default function MainPage() {
   const [latestPost, setLatestPost] = useState({});
@@ -48,6 +49,7 @@ export default function MainPage() {
       ) : (
         <img src="/nothing-Text.jpg" alt="nothing" className="nothingImg" />
       )}
+      <Post />
       <div className="search">
         <input
           type="text"

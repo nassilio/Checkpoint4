@@ -1,11 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const multer = require("multer");
 const {
   CONFIG: { backendPort },
   db,
   cloudinary
 } = require("./conf");
+
+const upload = multer({ dest: "tmp/" });
 const bodyParser = require("body-parser");
 
 app.use(bodyParser.json());
@@ -46,6 +49,18 @@ app.get("/api/search/post", (req, res) => {
       }
     }
   );
+});
+
+//POST img
+app.post("/api/postimage", upload.single("file"), (req, res) => {
+  const formData = req.file;
+  cloudinary.v2.uploader.upload(formData.path, function(err, result) {
+    if (err) {
+      res.status(500).send("Erreur lors de la sauvegarde de l'image");
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 app.listen(backendPort, err => {

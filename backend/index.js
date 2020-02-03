@@ -51,7 +51,7 @@ app.get("/api/search/post", (req, res) => {
   );
 });
 
-//POST img
+//POST image
 app.post("/api/postimage", upload.single("file"), (req, res) => {
   const formData = req.file;
   cloudinary.v2.uploader.upload(formData.path, function(err, result) {
@@ -59,6 +59,18 @@ app.post("/api/postimage", upload.single("file"), (req, res) => {
       res.status(500).send("Erreur lors de la sauvegarde de l'image");
     } else {
       res.send(result);
+    }
+  });
+});
+
+//POST text and subject
+app.post("/api/post", (req, res) => {
+  const formData = req.body;
+  db.query("INSERT INTO post SET ?", formData, (err, results) => {
+    if (err) {
+      res.status(500).send("Erreur lors de la sauvegarde du message");
+    } else {
+      res.sendStatus(201);
     }
   });
 });

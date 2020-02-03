@@ -1,11 +1,22 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { backend } from "../conf.js";
+import "../style/Post.scss";
 
 export default function Post() {
   const [text, setText] = useState("");
   const [subject, setSubject] = useState("");
   const [file, setFile] = useState(null);
+
+  const handleImageChange = e => {
+    e.preventDefault();
+    let reader = new FileReader();
+    let selectedFile = e.target.files[0];
+    reader.onloadend = () => {
+      setFile(selectedFile);
+    };
+    reader.readAsDataURL(selectedFile);
+  };
 
   const submit = e => {
     e.preventDefault();
@@ -13,11 +24,12 @@ export default function Post() {
       let uploadImage = new FormData();
       uploadImage.append("file", file);
       axios.post(`${backend}/api/postimage`, uploadImage).then(res => {
-        let image_url = res.data;
-        let postContent = { image_url, text, subject };
+        let image = res.data.secure_url;
+        let postContent = { image, text, subject };
         axios.post(`${backend}/api/post`, postContent).then(() => {
           setSubject("");
           setText("");
+          setFile(null);
         });
       });
     }
@@ -32,12 +44,12 @@ export default function Post() {
           placeholder="subject..."
           value={subject}
           onChange={e => {
-            setText(e.target.value);
+            setSubject(e.target.value);
           }}
-          className="headPost"
-          maxLength="500"
+          className="subject"
+          maxLength="50"
         />
-        <input type="file" />
+        <input type="file" onChange={e => handleImageChange(e)} />
         <textarea
           type="text"
           name="text"
@@ -46,7 +58,7 @@ export default function Post() {
           onChange={e => {
             setText(e.target.value);
           }}
-          className="headPost"
+          className="text"
           maxLength="500"
         />
 

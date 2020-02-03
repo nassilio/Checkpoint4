@@ -1,0 +1,37 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .subject {
+    margin-bottom: 2vh;
+    width: 200px;
+    height: 35px;
+  }
+  input {
+    margin-bottom: 2vh;
+  }
+  .text {
+    margin-bottom: 2vh;
+    width: 300px;
+    height: 55px;
+  }
+  button {
+    margin-bottom: 2vh;
+    color: white;
+    background-color: blue;
+    height: 30px;
+    width: 70%;
+    max-width: 200px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    justify-content: center;
+  }
+  button:hover {
+    color: blue;
+    background-color: rgba(202, 243, 236, 0.6);
+    border-color: blue;
+    border: solid 5px;
+    height: 30px;
+    cursor: pointer;
+  }
+}

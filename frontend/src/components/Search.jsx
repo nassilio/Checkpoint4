@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Image, CloudinaryContext } from "cloudinary-react";
 import "../style/Search.scss";
 
